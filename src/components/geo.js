@@ -70,6 +70,10 @@ class Versor {
   }
 }
 
-export default {
-  Versor
-};
+class Toto {
+  static addTwo(x) {
+    return x + 2;
+  }
+}
+
+export { Versor, Toto };

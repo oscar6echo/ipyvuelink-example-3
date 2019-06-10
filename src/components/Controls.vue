@@ -1,23 +1,28 @@
 <template>
-  <b-container fluid id="my-controls" class="debug-border">
+  <b-container
+    fluid
+    id="my-controls"
+    :style="styleContainer"
+    class="debug-border"
+  >
     <div class="d-flex flex-column">
-      <div class="d-flex flex-row">
-        <label id="nb-rows-label" class="m-1 p-1 pt-1" for="nb-rows"
+      <div class="d-flex flex-row mt-2">
+        <label id="nb-rows-label" class="ml-3 mt-2 p-0 pt-0" for="nb-rows"
           >Trip Time (sec):</label
         >
         <input
           id="trip-time"
-          class="m-2"
+          class="ml-2"
           type="number"
           step="0.1"
           v-model="tripTime"
         />
       </div>
       <b-form-select
-        v-model="nextCountry"
+        v-model="selectedCountry"
         :options="optionsCountry"
         id="my-select"
-        class="m-2"
+        class="mt-2 ml-3 mr-3"
       ></b-form-select>
     </div>
   </b-container>
@@ -30,13 +35,38 @@ export default {
   data() {
     return {
       tripTime: 2.0,
-      nextCountry: null,
-      optionsCountry: [
-        { value: null, text: 'Select a country' },
-        { value: 'France', text: 'France' },
-        { value: 'Spain', text: 'Spain' }
-      ]
+      selectedCountry: null,
+      optionsCountry: [{ value: null, text: 'Select a Country' }]
     };
+  },
+  computed: {
+    style() {
+      return this.$store.getters['style'];
+    },
+    countries() {
+      return this.$store.getters['countries'];
+    },
+    styleContainer() {
+      return {
+        width: this.style.controls.width + 'px',
+        height: this.style.controls.height + 'px'
+      };
+    }
+  },
+  watch: {
+    countries: {
+      handler: function() {
+        this.optionsCountry = [
+          { value: null, text: 'Select a country' },
+          ...this.countries.map(e => ({ value: e, text: e }))
+        ];
+      },
+      immediate: true
+    },
+    selectedCountry: function() {
+      console.log(this.selectedCountry);
+      this.$store.dispatch('setSelected', this.selectedCountry);
+    }
   }
 };
 </script>
@@ -48,16 +78,16 @@ export default {
 }
 
 #my-controls {
-  width: 300px;
-  height: 400px;
+  /* width: 300px;
+  height: 400px; */
   display: flex;
   flex-direction: column;
 }
 
 #trip-time {
-  width: 60px;
+  max-width: 70px;
 }
 #my-select {
-  width: 280px;
+  width: 90%;
 }
 </style>

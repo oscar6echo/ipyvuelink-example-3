@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid id="app" class="ma-0 debug-border">
+  <b-container fluid id="app" :style="style.app" class="ma-0 debug-border">
     <Globe />
     <Controls />
   </b-container>
@@ -14,6 +14,40 @@ export default {
   components: {
     Globe,
     Controls
+  },
+  data() {
+    return {
+      //   config
+      size: { height: 550, ratio: 1.6 },
+      country: 'France',
+
+      // local
+
+      // exposed
+      exposed: {}
+    };
+  },
+  computed: {
+    style() {
+      return {
+        globe: {
+          width: this.size.height,
+          height: this.size.height
+        },
+        controls: {
+          width: Math.round(this.size.height * this.size.ratio - 1),
+          height: this.size.height
+        },
+
+        app: {
+          width: Math.round(this.size.height * this.size.ratio) + 'px',
+          height: this.size.height + 'px'
+        }
+      };
+    }
+  },
+  created() {
+    this.$store.dispatch('setStyle', this.style);
   }
 };
 </script>
@@ -32,8 +66,8 @@ export default {
 }
 
 #app {
-  width: 900px;
-  height: 400px;
+  /* width: 900px;
+  height: 400px; */
   display: flex;
   flex-direction: row;
 }
