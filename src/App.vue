@@ -1,28 +1,40 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <b-container fluid id="app" class="ma-0 debug-border">
+    <Globe />
+    <Controls />
+  </b-container>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import Globe from './components/Globe.vue';
+import Controls from './components/Controls.vue';
 
 export default {
-  name: "app",
+  name: 'app',
   components: {
-    HelloWorld
+    Globe,
+    Controls
   }
 };
 </script>
 
-<style>
+<style scoped>
+/* remove before build */
+.debug-border {
+  border: 1px solid red;
+}
+
+/* override vuetify defaults in the context of standalone ipywidgets */
+/* scoped css */
+.container-fluid {
+  margin: 0px;
+  padding: 0px;
+}
+
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 900px;
+  height: 400px;
+  display: flex;
+  flex-direction: row;
 }
 </style>
