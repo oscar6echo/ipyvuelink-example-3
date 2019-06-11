@@ -1,8 +1,27 @@
 <template>
-  <b-container fluid id="app" :style="style.app" class="ma-0 debug-border">
-    <Globe />
-    <Controls />
-  </b-container>
+  <div>
+    <b-container fluid id="app" class="ma-0 debug-border" :style="style.app">
+      <Globe />
+      <Controls />
+    </b-container>
+
+    <!-- remove debug b-card before build -->
+
+    <b-card
+      title="Debug Area"
+      sub-title="Remove before build"
+      class="m-2 debug-border"
+      style="width:600px"
+    >
+      <b-card-text>
+        size:
+        {{ size }}
+        <br />
+        exposed:
+        {{ exposed }}
+      </b-card-text>
+    </b-card>
+  </div>
 </template>
 
 <script>
@@ -10,7 +29,7 @@ import Globe from './components/Globe.vue';
 import Controls from './components/Controls.vue';
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
     Globe,
     Controls
@@ -18,13 +37,10 @@ export default {
   data() {
     return {
       //   config
-      size: { height: 550, ratio: 1.6 },
-      country: 'France',
-
-      // local
-
-      // exposed
-      exposed: {}
+      size: { height: 550, ratio: 1.6 }
+      // technical
+      // dataModel: null,
+      // dataAvailable: false
     };
   },
   computed: {
@@ -38,16 +54,30 @@ export default {
           width: Math.round(this.size.height * this.size.ratio - 1),
           height: this.size.height
         },
-
         app: {
           width: Math.round(this.size.height * this.size.ratio) + 'px',
           height: this.size.height + 'px'
         }
       };
+    },
+    exposed() {
+      return this.$store.getters['exposed'];
     }
   },
   created() {
     this.$store.dispatch('setStyle', this.style);
+  },
+  watch: {
+    exposed: {
+      handler: function() {
+        console.log(this.exposed);
+        // this.dataModel.set('exposed', this.exposed);
+        // this.dataModel.save_changes();
+        // this.dataModel.touch();
+      },
+      immediate: true,
+      deep: true
+    }
   }
 };
 </script>

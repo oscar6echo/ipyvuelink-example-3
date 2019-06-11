@@ -7,12 +7,16 @@ export default new Vuex.Store({
   state: {
     style: {},
     countries: [],
-    selected: null
+    selected: null,
+    tripTime: null,
+    exposed: null
   },
   getters: {
     style: state => state.style,
     countries: state => state.countries,
-    selected: state => state.selected
+    selected: state => state.selected,
+    tripTime: state => state.tripTime,
+    exposed: state => state.exposed
   },
   mutations: {
     setStyle: (state, data) => {
@@ -23,6 +27,12 @@ export default new Vuex.Store({
     },
     setSelected: (state, data) => {
       Vue.set(state, 'selected', data);
+    },
+    setTripTime: (state, data) => {
+      Vue.set(state, 'tripTime', data);
+    },
+    setExposed: (state, data) => {
+      Vue.set(state, 'exposed', data);
     }
   },
   actions: {
@@ -34,6 +44,12 @@ export default new Vuex.Store({
     },
     setSelected: async (context, data) => {
       context.commit('setSelected', data);
+    },
+    setTripTime: async (context, data) => {
+      context.commit('setTripTime', data);
+    },
+    setExposed: async (context, data) => {
+      context.commit('setExposed', data);
     }
   }
 });

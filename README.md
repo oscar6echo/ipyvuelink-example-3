@@ -1,5 +1,9 @@
 # ipyvuelink-example-1
 
+
+![](img/ipyvuelink-example-3.png)
+
+
 ## 1 - Bootstapping
 
 This project is generated via [@vue/cli](https://cli.vuejs.org/) with the following manually selected features:
@@ -18,7 +22,7 @@ Then the following extra configuration was applied:
 
 - add packages `yarn add xxx`:
   - topojson-client
-  - d3-request
+  - d3-fetch
   - d3-transition
   - d3-geo
 

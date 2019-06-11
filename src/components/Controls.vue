@@ -36,7 +36,7 @@ export default {
     return {
       tripTime: 2.0,
       selectedCountry: null,
-      optionsCountry: [{ value: null, text: 'Select a Country' }]
+      optionsCountry: []
     };
   },
   computed: {
@@ -57,7 +57,7 @@ export default {
     countries: {
       handler: function() {
         this.optionsCountry = [
-          { value: null, text: 'Select a country' },
+          { value: null, text: 'Select a Country', disabled: true },
           ...this.countries.map(e => ({ value: e, text: e }))
         ];
       },
@@ -66,8 +66,13 @@ export default {
     selectedCountry: function() {
       console.log(this.selectedCountry);
       this.$store.dispatch('setSelected', this.selectedCountry);
+    },
+    tripTime: function() {
+      console.log(this.tripTime);
+      this.$store.dispatch('setTripTime', this.tripTime);
     }
-  }
+  },
+  mounted() {}
 };
 </script>
 
