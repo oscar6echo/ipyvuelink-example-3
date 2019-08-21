@@ -178,6 +178,7 @@ export default {
       };
       console.log(exposed);
       this.$store.dispatch('setExposed', exposed);
+      this.$store.dispatch('setCenterCoords', p2);
 
       //   console.log(fromName);
       //   console.log(fromId);

@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import store from './store';
 import Globe from './components/Globe.vue';
 import Controls from './components/Controls.vue';
 
@@ -33,6 +34,12 @@ export default {
   components: {
     Globe,
     Controls
+  },
+  beforeCreate() {
+    this.$store = store();
+  },
+  props: {
+    countryName: String
   },
   data() {
     return {
@@ -62,6 +69,12 @@ export default {
     },
     exposed() {
       return this.$store.getters['exposed'];
+    },
+    selected() {
+      return this.$store.getters['selected'];
+    },
+    centerCoords() {
+      return this.$store.getters['centerCoords'];
     }
   },
   created() {
@@ -77,6 +90,21 @@ export default {
       },
       immediate: true,
       deep: true
+    },
+    countryName: {
+      handler: function(v) {
+        this.$store.dispatch('setSelected', v);
+      }
+    },
+    selected: {
+      handler: function(v) {
+        this.$emit('country-name', v);
+      }
+    },
+    centerCoords: {
+      handler: function(v) {
+        this.$emit('center-coords', v);
+      }
     }
   }
 };
