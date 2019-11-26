@@ -1,0 +1,14 @@
+extension_name: example3
+entry: App.vue
+
+# vuetify | bootstrapvue
+component_library_used: bootstrapvue
+
+components:
+  Example3:
+    properties:
+      # name: type. 
+      # - name in snake_case
+      # - type: String | Integer | Float | Boolean | Object | Array | Any
+      country_name: String
+      center_coords: Array

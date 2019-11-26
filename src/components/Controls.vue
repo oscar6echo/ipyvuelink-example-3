@@ -51,6 +51,9 @@ export default {
         width: this.style.controls.width + 'px',
         height: this.style.controls.height + 'px'
       };
+    },
+    selected() {
+      return this.$store.getters['selected'];
     }
   },
   watch: {
@@ -70,6 +73,9 @@ export default {
     tripTime: function() {
       console.log(this.tripTime);
       this.$store.dispatch('setTripTime', this.tripTime);
+    },
+    selected(v) {
+      this.selectedCountry = v;
     }
   },
   mounted() {}
