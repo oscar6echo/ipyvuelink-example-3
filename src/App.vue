@@ -117,8 +117,8 @@ export default {
 }
 
 /* override vuetify defaults in the context of standalone ipywidgets */
-/* scoped css */
-.container-fluid {
+/* scoped css (prepended with .bootstrap-styles to match specificity in the notebook) */
+.bootstrap-styles .container-fluid {
   margin: 0px;
   padding: 0px;
 }
