@@ -2,7 +2,7 @@ extension_name: example3
 entry: App.vue
 
 # vuetify | bootstrapvue
-variant: bootstrapvue
+component_library_used: bootstrapvue
 
 components:
   Example3:
